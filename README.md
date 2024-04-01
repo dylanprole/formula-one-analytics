@@ -3,9 +3,7 @@ This repository contains an end-to-end data pipeline for ingesting, transforming
 
 ![Image](./images/f1_data_pipeline.jpg)
 
-# Evaluation Criteria
-
-## Problem description
+# Problem description
 - 0 points: Problem is not described
 - 2 points: Problem is described but shortly or not clearly
 - 4 points: Problem is well described and it's clear what the problem the project solves
