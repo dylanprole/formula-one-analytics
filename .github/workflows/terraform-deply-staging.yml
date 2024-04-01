@@ -1,0 +1,54 @@
+name: Staging deploy infrastructure to GCP
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# Setting some Env variables to work  with profiles.yml
+env:
+  # dbt env variables used in your dbt profiles.yml
+  DBT_PROFILES_DIR: ./
+  GOOGLE_APPLICATION_CREDENTIALS: /tmp/google/google-service-account.json
+
+  # the contents of the keyfile pulled from GitHub Actions secrets
+  KEYFILE_CONTENTS: ${{secrets.KEYFILE_CONTENTS}}
+
+jobs:
+  deploy-terraform-staging:
+    name: "Plan & Deploy Terraform plan on Staging"
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      pull-requests: write
+
+    steps:
+      # Prep Google keyfile
+      - run: mkdir -p "$(dirname $GOOGLE_APPLICATION_CREDENTIALS)"
+      - run: echo "$KEYFILE_CONTENTS" > $GOOGLE_APPLICATION_CREDENTIALS
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      
+      - name: Terraform Init
+        id: init
+        run: terraform -chdir=./infrastructure/staging init
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform -chdir=./infrastructure/staging fmt -recursive -check
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform -chdir=./infrastructure/staging validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform -chdir=./infrastructure/staging plan
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform -chdir=./infrastructure/staging apply -auto-approve
