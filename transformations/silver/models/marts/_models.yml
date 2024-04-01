@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: f1_results
+    description: >
+      Results of all F1 races since 1950.
+    columns:
+      - name: race_year
+        data_type: int64
+        description: "Year the race was held"
+      
+      - name: race_date
+        data_type: date
+        description: "date the race was held"
+      
+      - name: season_round
+        data_type: int64
+        description: "Round of the race in the season"
+      
+      - name: circuit_name
+        data_type: string
+        description: "Name of race circuit"
+      
+      - name: position
+        data_type: int64
+        description: "Final race order the driver placed"
+      
+      - name: points
+        data_type: numeric
+        description: "Number of points the driver earned"
+      
+      - name: grid_number
+        data_type: int64
+        description: "Starting grid position of the driver"
+      
+      - name: driver_name
+        data_type: string
+        description: "Full name of the driver"
+      
+      - name: driver_nationality
+        data_type: string
+        description: "Nationality of the driver"
+      
+      - name: driver_date_of_birth
+        data_type: date
+        description: "Date of birth of the driver"
+      
+      - name: constructor_name
+        data_type: string
+        description: "Name of the team that the driver is racing with"
+      
+      - name: constructor_nationality
+        data_type: string
+        description: "Nationality of the constructor team"
+      
+      - name: status_description
+        data_type: string
+        description: "Description of the status of the driver's race"
+      
+      - name: fastest_lap_rank
+        data_type: int64
+        description: "Rank of the driver for fastest lap"
+      
+      - name: fastest_lap
+        data_type: int64
+        description: "The lap number of the driver's fastest lap"

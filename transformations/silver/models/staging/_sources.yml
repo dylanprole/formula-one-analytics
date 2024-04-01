@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: taxi-rides-ny-412407  
+    schema: bronze  
+    tables:
+      - name: results
+      - name: races
+      - name: drivers
+      - name: constructors
+      - name: status
