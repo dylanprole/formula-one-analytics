@@ -6,7 +6,7 @@ silver:
       method: service-account
       location: US
       keyfile: "{{ env_var('DBT_PROFILE_KEYFILE') }}"
-      project: taxi-rides-ny-412407
+      project: "{{ env_var('GCP_PROJECT') }}"
       dataset: development
       threads: 1
       job_execution_timeout_seconds: 200
@@ -17,7 +17,7 @@ silver:
       method: service-account
       location: US
       keyfile: "{{ env_var('DBT_PROFILE_KEYFILE') }}"
-      project: taxi-rides-ny-412407
+      project: "{{ env_var('GCP_PROJECT') }}"
       dataset: silver_staging
       threads: 1
       job_execution_timeout_seconds: 200
@@ -28,7 +28,7 @@ silver:
       method: service-account
       location: US
       keyfile: "{{ env_var('DBT_PROFILE_KEYFILE') }}"
-      project: taxi-rides-ny-412407
+      project: "{{ env_var('GCP_PROJECT') }}"
       dataset: silver
       threads: 1
       job_execution_timeout_seconds: 200

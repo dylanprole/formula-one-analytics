@@ -64,7 +64,7 @@ driver_standings as (
 
     select
 
-        race_season,
+        race_season as season,
 
         row_number() over (
             partition by

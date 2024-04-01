@@ -11,6 +11,9 @@ env:
   DBT_PROFILES_DIR: ./
   DBT_PROFILE_KEYFILE: /tmp/google/google-service-account.json
 
+  # Name of GCP project
+  GCP_PROJECT: taxi-rides-ny-412407
+
   # the contents of the keyfile pulled from GitHub Actions secrets
   KEYFILE_CONTENTS: ${{secrets.KEYFILE_CONTENTS}}
 
@@ -40,26 +43,26 @@ jobs:
           pip install dbt-core
           pip install dbt-bigquery
 
-      - name: Package dbt dependancies
+      - name: Silver - Package dbt dependancies
         working-directory: ./transformations/silver
         run: dbt deps
 
-      - name: Test connection to BigQuery
+      - name: Silver - est connection to BigQuery
         working-directory: ./transformations/silver
         run: dbt debug --target prod
 
-      - name: Build dbt repository
+      - name: Silver - Build dbt repository
         working-directory: ./transformations/silver
         run: dbt build --target prod
         
-      - name: Package dbt dependancies
+      - name: Gold - Package dbt dependancies
         working-directory: ./transformations/gold
         run: dbt deps
 
-      - name: Test connection to BigQuery
+      - name: Gold - Test connection to BigQuery
         working-directory: ./transformations/gold
         run: dbt debug --target prod
 
-      - name: Build dbt repository
+      - name: Gold - Build dbt repository
         working-directory: ./transformations/gold
         run: dbt build --target prod
