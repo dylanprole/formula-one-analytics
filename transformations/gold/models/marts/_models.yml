@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: f1_results
+    description: >
+      Drivers standings for each season.
+    columns:
+      - name: race_season
+        data_type: int64
+        description: "Race season"
+
+      - name: standing
+        data_type: int64
+        description: "Final position the driver placed for the season"
+
+      - name: driver_name
+        data_type: string
+        description: "Full name of driver"
+
+      - name: total_points
+        data_type: numeric
+        description: "Total points the driver earned for the season"
+
+      - name: total_race_wins
+        data_type: numeric
+        description: "Total number of races the driver won"
+
+      - name: total_podiums
+        data_type: numeric
+        description: "Total number of times the driver placed in top 3 of a race"
+
+      - name: total_fastest_laps
+        data_type: numeric
+        description: "Total number of times the driver received fastest lap for a race"
+        
