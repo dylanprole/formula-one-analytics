@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: f1_results
+  - name: f1_driver_standings
     description: >
       Drivers standings for each season.
     columns:
