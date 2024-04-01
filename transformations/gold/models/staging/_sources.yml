@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: silver
+    database: taxi-rides-ny-412407
+    schema: silver
+    tables:
+      - name: f1_results
