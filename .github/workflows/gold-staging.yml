@@ -44,8 +44,8 @@ jobs:
 
       - name: Test connection to BigQuery
         working-directory: ./transformations/gold
-        run: dbt debug --target staging
+        run: dbt debug --target staging --profiles-dir ./
 
       - name: Build dbt repository
         working-directory: ./transformations/gold
-        run: dbt build --target staging
+        run: dbt build --target staging --profiles-dir ./
