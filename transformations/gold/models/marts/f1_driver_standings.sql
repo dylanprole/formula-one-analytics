@@ -75,7 +75,8 @@ driver_standings as (
                 total_podiums desc
         ) as standing,
 
-        driver_name,
+        driver_name as driver,
+        constructor_name as constructor,
         total_points,
         total_race_wins,
         total_podiums,
