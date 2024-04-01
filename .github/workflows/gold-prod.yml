@@ -39,8 +39,10 @@ jobs:
         run: |
           pip install dbt-core
           pip install dbt-bigquery
-          dbt deps
-          dbt --version
+
+      - name: Package dbt dependancies
+        working-directory: ./transformations/gold
+        run: dbt deps --profiles-dir ./
 
       - name: Test connection to BigQuery
         working-directory: ./transformations/gold
