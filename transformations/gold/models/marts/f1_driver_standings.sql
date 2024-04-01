@@ -28,6 +28,7 @@ driver_points as (
         -- groupings
         race_year as race_season,
         driver_name,
+        constructor_name,
 
         -- aggregates
         sum(points) as total_points,
@@ -55,7 +56,7 @@ driver_points as (
 
     from f1_results
 
-    group by 1, 2
+    group by 1, 2, 3
 
 ),
 
