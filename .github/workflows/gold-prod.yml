@@ -8,7 +8,7 @@ on:
 # Setting some Env variables to work  with profiles.yml
 env:
   # dbt env variables used in your dbt profiles.yml
-  DBT_PROFILES_DIR: ./transformations/gold/
+  DBT_PROFILES_DIR: ./transformations/gold
   DBT_PROFILE_KEYFILE: /tmp/google/google-service-account.json
 
   # the contents of the keyfile pulled from GitHub Actions secrets
@@ -44,8 +44,8 @@ jobs:
 
       - name: Test connection to BigQuery
         working-directory: ./transformations/gold
-        run: dbt debug --target prod
+        run: dbt debug --target prod --profiles-dir ./
 
       - name: Build dbt repository
         working-directory: ./transformations/gold
-        run: dbt build --target prod
+        run: dbt build --target prod --profiles-dir ./
