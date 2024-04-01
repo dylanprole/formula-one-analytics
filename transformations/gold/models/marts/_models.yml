@@ -5,7 +5,7 @@ models:
     description: >
       Drivers standings for each season.
     columns:
-      - name: race_season
+      - name: season
         data_type: int64
         description: "Race season"
 
@@ -13,9 +13,13 @@ models:
         data_type: int64
         description: "Final position the driver placed for the season"
 
-      - name: driver_name
+      - name: driver
         data_type: string
         description: "Full name of driver"
+
+      - name: constructor
+        data_type: string
+        description: "Name of the team the driver races for"
 
       - name: total_points
         data_type: numeric
