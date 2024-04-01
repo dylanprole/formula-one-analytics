@@ -3,10 +3,14 @@ This repository contains an end-to-end data pipeline for ingesting, transforming
 
 ![Image](./images/f1_data_pipeline.jpg)
 
-# Problem description
-- 0 points: Problem is not described
-- 2 points: Problem is described but shortly or not clearly
-- 4 points: Problem is well described and it's clear what the problem the project solves
+## Problem description
+This project was created to track Formula One results.
+
+The source data for this project contains many different CSV files, allowing you to create endless different data models.
+
+I have specifically chosen to track Driver Standings, as the data can be updated regularly to track the current 2024 Formula One season, including constructor wins.
+
+An additional tile has been added to the dashboard to show which teams have dominated Formula One races over the past 5 years.
 
 ## Cloud
 The main cloud platform used for this project is Google Cloud Platform.
@@ -23,24 +27,29 @@ The code for deploying these resources can be found in [infrastructure](./infras
 Note: Staging and production infrastructure is deployed using GitHub actions as a CI/CD tool.
 
 ## Data ingestion (Batch)
-Batch / Workflow orchestration
-- 0 points: No workflow orchestration
-- 2 points: Partial workflow orchestration: some steps are orchestrated, some run manually
-- 4 points: End-to-end pipeline: multiple steps in the DAG, uploading data to data lake
+The data ingestion is run in multiple steps, and orchestrated within a Docker file.
+
+The following steps are done for data ingestions:
+- [Ingest data]() from custom CSV API to GCS data lake.
+- [Load data]() from data lake to Google BigQuery.
+
+To perform data ingestion, a docker file can be built and run by running the following commands inside [/data_ingestion](./data_ingestion):
+- `docker build -t f1-data:latest .`
+- `docker run f1-data:latest`
+
+This will build a docker container and run both Python scripts inside of the container, allowing the data ingestion pipeline to be run from any platform where Docker is installed.
 
 ## Data warehouse
 Google BigQuery has been used for the data warehouse tool in this project.
 
-The data is arranged using [Medallion Architecture](https://www.databricks.com/glossary/medallion-architecture) where each stage of data transformation has improved data quality.
-
-The transformations of this data is done by using dbt.
+The data is arranged using [Medallion Architecture](https://www.databricks.com/glossary/medallion-architecture) where each stage of data transformation is performed using dbt.
 
 #### Partitioning
 Tables are also partitioned to improve their performance. For example, the "F1 Driver Standings" table is partitioned by race season, as shown in the model config of [f1_driver_standings.sql](./transformations/gold/models/marts/f1_driver_standings.sql).
 
 Race season was selected for partitioning as the dashboard utilizes filters which filter on race season, hence less data is queried if the table is partitioned this way.
 
-## Transformations (dbt, spark, etc)
+## Transformations (dbt)
 The tool used for transformation of data in this project is dbt.
 
 This tool allows all code to be version controlled, and transformations to be done sequentially.
@@ -49,10 +58,14 @@ Data transformations done by dbt are performed using GitHub actions as a CI/CD t
 
 This allows dbt to perform transformations in staging and productions environments when changes are made to the code and pushed to the main branch.
 
+More information about using dbt with GitHub actions can be found [here](https://dbtips.substack.com/p/run-dbt-with-github-actions).
+
 ## Dashboard
 For data visualization, Google Looker Studio has been used.
 
-This allows easy integration with the Google Cloud Platform ecosystem
+This allows easy integration with the Google Cloud Platform ecosystem.
+
+Link to dashboard: [Formula One Analytics](https://lookerstudio.google.com/reporting/47305871-638b-47f6-a6ca-7b7d293b68c5)
 
 ![Image](./images/f1_dashboard.png)
 
@@ -66,10 +79,10 @@ The first two tiles can be filtered by race season.
 ## Reproducibility
 Due to this project being run on a personal cloud account, it can be difficult to reproduce.
 
-If you have your own Google Cloud Platform account, it could be possible to reproduce this project.
+If you have your own Google Cloud Platform account, it is possible to reproduce this project.
 
-#### Clone Repository
-The first step is to clone this repository. Having your own repository will allow you to set your own GCP credentials in order to run the project.
+#### Fork Repository
+The first step is fork this repository and create your own. Having your own repository will allow you to set your personal GCP credentials in order to run the project.
 
 #### GitHub Actions - Secrets Manager
 In order to allow GitHub actions to perform changes on your GCP account, you must add your service account as a secret to the repository.
@@ -83,7 +96,7 @@ You must specify your own GCP project name in the following code:
 - [prod/_variables.tf](./infrastructure/prod/_variables.tf)
 - [staging/_variables.tf](./infrastructure/staging/_variables.tf)
 - [dev/_variables.tf](./infrastructure/dev/_variables.tf)
-- (data_ingestion/load_f1_data.py)[data_ingestion/load_f1_data.py]
+- [data_ingestion/load_f1_data.py](data_ingestion/load_f1_data.py)
 
 
 #### GCS Bucket Name
