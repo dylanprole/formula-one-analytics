@@ -2,7 +2,7 @@
   config(
     materialized = 'table',
     partition_by = {
-      "field": "race_season",
+      "field": "season",
       "data_type": "int64",
       "range": {
         "start": 1950,
@@ -26,9 +26,9 @@ driver_points as (
     select
 
         -- groupings
-        race_year as race_season,
-        driver_name,
-        constructor_name,
+        season,
+        driver,
+        constructor,
 
         -- aggregates
         sum(points) as total_points,
@@ -64,19 +64,19 @@ driver_standings as (
 
     select
 
-        race_season,
+        season,
 
         row_number() over (
             partition by
-                race_season
+                season
             order by
                 total_points desc,
                 total_race_wins desc,
                 total_podiums desc
         ) as standing,
 
-        driver_name as driver,
-        constructor_name as constructor,
+        driver,
+        constructor,
         total_points,
         total_race_wins,
         total_podiums,
