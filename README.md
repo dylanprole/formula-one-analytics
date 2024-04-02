@@ -1,6 +1,8 @@
 # Formula One Analytics
 This repository contains an end-to-end data pipeline for ingesting, transforming, and visualising formula one data.
 
+Data Source: [Ergast Formula 1, from 1950 up to date (API)](http://ergast.com/mrd/db) [[Meta]](https://github.com/awesomedata/apd-core/tree/master/core//Sports/Ergast-Formula-1-from-1950-up-to-date-API.yml)
+
 ![Image](./images/f1_data_pipeline.jpg)
 
 ## Problem description
