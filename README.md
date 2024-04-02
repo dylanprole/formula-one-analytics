@@ -1,5 +1,5 @@
 # Formula One Analytics
-This repository contains an end-to-end data pipeline for ingesting, transforming, and visualising formula one data.
+This repository contains an end-to-end data pipeline for ingesting, transforming, and visualizing formula one data.
 
 ![Image](./images/f1_data_pipeline.jpg)
 
