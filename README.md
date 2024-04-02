@@ -106,3 +106,5 @@ In order to specifiy which bucket the project will use as a data lake, you must 
 - [staging/_variables.tf](./infrastructure/staging/_variables.tf)
 - [dev/_variables.tf](./infrastructure/dev/_variables.tf)
 
+#### Local Environment Variables
+Some scripts require the use of GCP service account credentials. To keep access keys and credentials safe, you can place them as environment variables when running code locally.
